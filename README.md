@@ -10,7 +10,9 @@ ref:https://medium.com/scrappy-squirrels/tutorial-create-generative-nft-art-with
 ```pip install Pillow pandas progressbar2```
 
 **Go to the folder**
+
 ```cd folder_path```
 
 **Run python**
+
 ```python3 nft_generate.py```
