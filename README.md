@@ -8,6 +8,7 @@ ref:https://medium.com/scrappy-squirrels/tutorial-create-generative-nft-art-with
 **Install required packages**
 
 ```pip install Pillow pandas progressbar2```
+
 **Go to the folder**
 ```cd folder_path```
 
