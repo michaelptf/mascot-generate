@@ -1,4 +1,6 @@
-from flask import Flask, request, render_template
+
+
+from flask import Flask, request, render_template, send_file
 from nft_generate import main
 import os
 
@@ -17,3 +19,7 @@ def home():
         return render_template("index.html", result_img=result_img)
     return render_template("index.html")
 
+@app.route('/download')
+def download_nft():
+    img_path = os.path.join('output', 'edition_img_output', 'images', '0.png')
+    return send_file(img_path, as_attachment=True)
