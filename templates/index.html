@@ -10,24 +10,34 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 48px;
   margin: 4px 2px;
   cursor: pointer;
+  border-radius: 4px;
 }
+.button2 {
+    font-size: 24px;
+    background-color: green;
+}
+
 
 </style>
 </head>
 <body>
 
-<h2>Generate a random NFT</h2>
-
+<h1>Generate a random NFT</h1>
+{% if result_img %}
 <div>
-    <img src="{{result_img}}" alt="NFT" height="200px" width="200px">
+    <img src="{{result_img}}" alt="NFT" height="400px" width="400px">
 </div>
-
+<a href="{{url_for('download_nft')}}" class="button button2">Download</a>
+{% endif %}
 <form  method="post" action="/">
     <p><button class="button">Generate</button></p>
 </form>
+
+
+
 
 </body>
 </html>
