@@ -235,8 +235,8 @@ def main():
     print("Starting task...")
     rt = generate_images(edition_name, num_avatars)
 
-    print("Saving metadata...")
-    rt.to_csv(os.path.join('output', 'edition_' + str(edition_name), 'metadata.csv'))
+    # print("Saving metadata...")
+    # rt.to_csv(os.path.join('output', 'edition_' + str(edition_name), 'metadata.csv'))
 
     print("Task complete!")
 
