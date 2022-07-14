@@ -21,5 +21,5 @@ def home():
 
 @app.route('/download')
 def download_nft():
-    img_path = os.path.join('output', 'edition_img_output', 'images', '0.png')
+    img_path = os.path.join('static', 'output', 'edition_img_output', 'images', '0.png')
     return send_file(img_path, as_attachment=True)

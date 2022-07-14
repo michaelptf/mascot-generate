@@ -12,14 +12,14 @@
     </div>
     <h1 class="flexbox-item pageTitle">Generate a random NFT</h1>
     {% if result_img %}
-    <div class="flexbox-item">
-        <img src="{{result_img}}" alt="NFT" class="result-image" height="400px" width="400px">
-    </div>
-    <a href="{{url_for('download_nft')}}" class="button flexbox-item">Download</a>
+      <div class="flexbox-item">
+          <img src="{{result_img}}" alt="NFT" class="result-image" height="400px" width="400px">
+      </div>
+      <a href="{{url_for('download_nft')}}" class="button button-download flexbox-item ">Download</a>
     {% endif %}
     <div class="flexbox-item">
       <form  method="post" action="/">
-        <button class="button">Generate</button>
+        <button class="button flexbox-item button-generate">Generate</button>
       </form>
     </div>
   </div>
