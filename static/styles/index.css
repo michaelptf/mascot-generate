@@ -1,0 +1,47 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+@import url(//fonts.googleapis.com/css?family=Montserrat);
+
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 30px;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat';
+}
+
+.flexbox-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo{
+  margin: 20px;
+  margin-top: 50px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.pageTitle{
+  margin: 20px;
+}
+
+.button {
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 400px;
+  min-width: none;
+  height: 60px;
+}

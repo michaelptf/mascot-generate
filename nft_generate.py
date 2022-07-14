@@ -153,11 +153,11 @@ def generate_images(edition, count, drop_dup=True):
         rarity_table[layer['name']] = []
 
     # Define output path to output/edition_{edition_num}
-    path = os.path.join('output', 'edition_' + str(edition), 'images')
-    parent_dir = os.path.dirname(os.path.abspath(__file__))
-    print(parent_dir)
+    path = os.path.join('static', 'output', 'edition_' + str(edition), 'images')
+    # parent_dir = os.path.dirname(os.path.abspath(__file__))
+    # print(parent_dir)
     op_path = os.path.join(parent_dir, path)
-
+    print(op_path)
     # Will require this to name final images as 000, 001,...
     zfill_count = len(str(count - 1))
 
