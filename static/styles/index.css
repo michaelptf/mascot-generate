@@ -10,6 +10,11 @@ body {
   font-family: 'Montserrat';
   padding: 0;
   margin: 0;
+  background: url(../images/Rectanglebg_ball_blue.png) left bottom, 
+  url(../images/Rectanglebg_ball_red.png) right top,
+  linear-gradient(103.33deg, rgba(214, 221, 235, 0.8) 0%, rgba(240, 237, 243, 0.8) 51.54%, rgba(237, 226, 245, 0.8) 98.97%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .flexbox-container {
@@ -19,16 +24,10 @@ body {
   align-items: center;
 }
 
-.flexbox-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
 .logo {
   margin: 20px;
-  margin-top: 50px;
+  margin-top: 210px;
   max-width: 100%;
   max-height: 100%;
 }
@@ -40,27 +39,37 @@ body {
 
 .pageTitle {
   margin: 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 29px;
+  color: #000000;
 }
 
-.result-image {
-  width: 75%;
-  height: 75%;
-  border-radius: 4px;
-}
 
 .button {
   background-color: #008CBA;
   border: none;
-  color: white;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 4px;
-  width: 300px;
+  border-radius: 16px;
+}
+
+.button-generate {
+  background: #0066FF;
+  width: 180px;
+  color: white;
+  /* button shadow */
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  font-size: 12px;
+  /* identical to box height */
+  letter-spacing: 0.015em;
+  margin-top: 24px;
 }
 
 input[type=number] {
@@ -80,11 +89,25 @@ input[type=text]:focus {
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+@media all and (min-width: 992px) {
+  body {
+    background: url(../images/Rectanglebg_ball_blue.png) 30% bottom, 
+    url(../images/Rectanglebg_ball_red.png) 65% top,
+    linear-gradient(103.33deg, rgba(214, 221, 235, 0.8) 0%, rgba(240, 237, 243, 0.8) 51.54%, rgba(237, 226, 245, 0.8) 98.97%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
   .result-image {
     width: 50%;
     height: 50%;
     border-radius: 4px;
     margin: 5px;
+  }
+  .pageTitle {
+    font-size: 24px;
+  }
+  .button-generate {
+    width: 300px;
+    margin-top: 40px;
   }
 }

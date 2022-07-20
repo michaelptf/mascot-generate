@@ -1,0 +1,198 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+@import url(//fonts.googleapis.com/css?family=Montserrat);
+
+* {
+  box-sizing: border-box;
+  font-size: 24px;
+}
+
+body {
+  font-family: 'Montserrat';
+  padding: 0;
+  margin: 0;
+  background: url(../images/Rectanglebg_ball_blue.png) left bottom, 
+  url(../images/Rectanglebg_ball_red.png) right top,
+  linear-gradient(103.33deg, rgba(214, 221, 235, 0.8) 0%, rgba(240, 237, 243, 0.8) 51.54%, rgba(237, 226, 245, 0.8) 98.97%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.flexbox-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  margin: 20px;
+  margin-top: 64px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.logo-image {
+  max-width: 75%;
+  height: auto;
+}
+
+.pageTitle {
+  margin: 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 29px;
+  color: #000000;
+}
+
+.result-image {
+  width: 75%;
+  height: 75%;
+  border-radius: 4px;
+}
+
+.nft-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nft-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+}
+
+.nft-info {
+  background: rgba(42, 39, 201, 0.1);
+  border-radius: 2.5px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 11px;
+  color: #3266C2;
+  padding: 6px 8px;
+  margin: 16px 0px;
+}
+
+.rarity-box {
+}
+
+.rarity-text {
+
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  border: none;
+  padding: 10px 32px;
+  margin: 8px 2px;
+  width: 150px;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  box-shadow: 0px 1.5px 0px rgba(0, 0, 0, 0.2);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.015em;
+}
+
+.button-download {
+  margin-top: 10px;
+  background: #3266C2;
+}
+
+.button-mint {
+  background: #C22A37;
+}
+
+.button-generate {
+  background: #FFFFFF;
+  color: #3266C2;
+}
+
+input[type=number] {
+  width: 300px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  border-radius: 4px;
+  height: 50px;
+}
+
+input[type=text]:focus {
+  border: 3px solid #555;
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media all and (min-width: 992px) {
+  .logo-image {
+    max-width: 100%;
+    height: auto;
+  }
+  .pageTitle {
+    font-size: 24px;
+  }
+  .nft-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .nft-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 75%;
+  }
+  .result-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 4px;
+    margin: 5px;
+  }
+  .nft-info {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 8px 10px;
+    margin-left: 12px;
+  }
+  .divider{
+    border: 1px solid #DCD9EE;
+    margin: 26px 0px;
+    width: 444px;
+  }
+  .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 444px;
+  }
+  .button {
+    width: 200px;
+    border-radius: 16px;
+    font-size: 16px;
+  }
+  .button-generate {
+    order: 2;
+    width: 420px;
+  }
+}
