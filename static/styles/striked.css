@@ -121,6 +121,7 @@ body {
 .button-generate {
   background: #FFFFFF;
   color: #3266C2;
+  height: auto;
 }
 
 input[type=number] {
