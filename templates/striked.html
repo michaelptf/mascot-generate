@@ -12,19 +12,31 @@
     </div>
     <h1 class="pageTitle">Get Your Unique Avatar</h1>
 
+    <!-- show result image -->
+    {% if result_image %}
+      <div class="nft-container">
+          <img src="{{result_image}}" alt="NFT" class="result-image" height="400px" width="400px">
+          <div class="nft-info-container">
+            <div class="nft-info">{{brand_name}} #{{image_number}}</div>
+            <div class="nft-info">{{edition_name}} Edition 1/1</div>
+            <div class="nft-info rarity-box">SUPER RARE</div>
+          </div>
+      </div>
+    {% endif %}
+
     <!-- show images in image list-->
-    {% if result_image_list %}
+    <!-- {% if result_image_list %}
       {% for result_image_list in result_image_list %}
       <div class="nft-container">
         <img src="{{ url_for('static', filename=result_image_list)}}" alt="NFT" class="result-image" height="400px" width="400px">
         <div class="nft-info-container">
-          <div class="nft-info">Gump #0</div>
+          <div class="nft-info">Gump #{{image_number}}</div>
           <div class="nft-info">Limited Edition 1/1</div>
           <div class="nft-info rarity-box">SUPER RARE</div>
         </div>
       </div>
       {% endfor %}
-    {% endif %}
+    {% endif %} -->
 
     <!-- divider bar -->
     <div class="divider"></div>

@@ -146,7 +146,7 @@ def generate_trait_set_from_config():
 
 
 # Generate the image set. Don't change drop_dup
-def generate_images(edition, count, drop_dup=True):
+def generate_images(edition, count, brand_name, drop_dup=True):
 
     # Initialize an empty rarity table
     rarity_table = {}
@@ -202,7 +202,7 @@ def generate_images(edition, count, drop_dup=True):
 
         # Rename images such that it is sequentialluy numbered
         for idx, img in enumerate(sorted(os.listdir(op_path))):
-            os.rename(os.path.join(op_path, img), os.path.join(op_path, 'Amuro_' + 'Brand name_' + 'Avatar_' + str(idx).zfill(zfill_count) + '.png'))
+            os.rename(os.path.join(op_path, img), os.path.join(op_path, 'Amuro_' + brand_name + '_Avatar_' + str(idx).zfill(zfill_count) + '.png'))
 
 
     # Modify rarity table to reflect removals
@@ -211,7 +211,7 @@ def generate_images(edition, count, drop_dup=True):
     return rarity_table
 
 # Main function. Point of entry
-def main(num_of_img):
+def main(num_of_img, name_of_edition, name_of_brand):
 
     print("Checking assets...")
     parse_config()
@@ -231,10 +231,10 @@ def main(num_of_img):
     # print("What would you like to call this edition?: ")
     # edition_name = input()
 
-    edition_name = "img_output"
+    edition_name = name_of_edition
     num_avatars = int(num_of_img)
     print("Starting task...")
-    rt = generate_images(edition_name, num_avatars)
+    rt = generate_images(edition_name, num_avatars, name_of_brand)
 
     print("Saving metadata...")
     rt.to_csv(os.path.join('static', 'output', 'edition_' +  str(edition_name), 'metadata.csv'))
