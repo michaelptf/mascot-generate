@@ -27,7 +27,7 @@ def strike():
   if request.method == "POST":
     # generate a random numebr
     global image_number
-    image_number = random.randint(0, 1250)
+    image_number = random.randint(0, 1000)
     image_number = f"{image_number:04}"
 
     if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')):
