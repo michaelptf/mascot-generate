@@ -68,7 +68,7 @@ body {
 
 .nft-info {
   background: rgba(42, 39, 201, 0.1);
-  border-radius: 2.5px;
+  border-radius: 4px;
   font-style: normal;
   font-weight: 600;
   font-size: 9px;
@@ -78,29 +78,13 @@ body {
   margin: 16px 0px;
 }
 
-.rarity-box {
-  padding: 10px;
-  display: inline-block;
-  position: relative;
-  z-index: 0;
+.super-rare {
+  background: linear-gradient(90deg, #FE617F 0%, #C274B2 52.43%, #6179DD 100%);
+  color: #FFFFFF;
 }
-
-.rarity-box::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  padding: 1px;
-  border-radius: 2.5px;
+.rare {
   background: linear-gradient(90deg, #9F3B4E 0%, #7C4771 52.43%, #4A5DAA 100%);
-  -webkit-mask: 
-     linear-gradient(#fff 0 0) content-box, 
-     linear-gradient(#fff 0 0);
-  mask: 
-     linear-gradient(#fff 0 0) content-box, 
-     linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  color: #FFFFFF;
 }
 
 .button-container {
@@ -133,7 +117,7 @@ body {
 }
 
 .button-mint {
-  background: #C22A37;
+  background: #00C1A2;;
 }
 
 .button-generate {

@@ -1,7 +1,10 @@
+
+from asyncore import read
 from flask import Flask, request, render_template, send_file
 from nft_generate import main
 import os
 import random
+import csv
 
 
 app = Flask(__name__)
@@ -15,6 +18,27 @@ app.config['EDITION_NAME'] = edition_name
 # change the path where the output image will be
 img_folder = os.path.join('static', 'output', 'edition_' + edition_name, 'images')
 app.config['UPLOAD_FOLDER'] = img_folder
+# change the path where the output csv file will be
+csvfile_path = os.path.join('static', 'output', 'edition_' + edition_name, 'metadata.csv')
+app.config['CSV_PATH'] = csvfile_path
+
+def checkRarity(image_number):
+  # get the nft number
+  nft_id = image_number
+  # open metadata.csv
+  with open(app.config['CSV_PATH'], 'r') as file:
+    reader = csv.reader(file)
+    rows = list(reader)
+    # get the specific nft row
+    result_row = rows[nft_id+1]
+
+    if(result_row[2] == '91' or result_row[2] == '197'):
+      return "SUPER RARE"
+    elif(result_row[2] == '108' or result_row[2] =='118'):
+      return "RARE"
+    elif(result_row[2] == '60' or result_row[2] =='71' or result_row[2] =='141'):
+      return "COMMON"
+    
 
 
 @app.route('/', methods=["POST", "GET"])
@@ -26,9 +50,8 @@ def strike():
   
   if request.method == "POST":
     # generate a random numebr
-    global image_number
-    image_number = random.randint(0, 1000)
-    image_number = f"{image_number:04}"
+    random_image_number = random.randint(0, 1000)
+    image_number = f"{random_image_number:04}"
 
     if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')):
       print("Already have nft pool generated! no need generate nft pool again")
@@ -42,10 +65,19 @@ def strike():
     # get the nft image path
     result_image = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
 
+    # check the rarity of the nft
+    rarity_text = checkRarity(random_image_number)
+    if(rarity_text == "SUPER RARE"):
+      rarity='super-rare'
+    elif(rarity_text == "RARE"):
+      rarity='rare'
+    else:
+      rarity=''
+    
     # show mutiple of image
     # image_list = os.listdir(app.config['UPLOAD_FOLDER'])
     # result_image_list = ['output/edition_img_output/images/' + image for image in image_list]
-    return render_template("striked.html", result_image=result_image, image_number=image_number, brand_name=app.config['BRAND_NAME'], edition_name=app.config['EDITION_NAME'])
+    return render_template("striked.html", result_image=result_image, image_number=image_number, brand_name=app.config['BRAND_NAME'], edition_name=app.config['EDITION_NAME'], rarity_box=rarity,rarity_text=rarity_text)
 
 @app.route('/download')
 def download_nft():
