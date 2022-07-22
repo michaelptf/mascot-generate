@@ -70,7 +70,7 @@ body {
   background: rgba(42, 39, 201, 0.1);
   border-radius: 4px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 9px;
   line-height: 11px;
   color: #3266C2;
@@ -106,7 +106,7 @@ body {
   cursor: pointer;
   box-shadow: 0px 1.5px 0px rgba(0, 0, 0, 0.2);
   color: #FFFFFF;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 12px;
   letter-spacing: 0.015em;
 }
