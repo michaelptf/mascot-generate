@@ -11,10 +11,24 @@
       <img src="{{url_for('static',filename='images/amuro_logo.png')}}" class="logo-image" alt="logo">
     </div>
     <h1 class="pageTitle">Get Your Unique Avatar</h1>
+
+    <div class="image-gallery-container">
+      {% if preview_image_list %}
+        {% for preview_image_list in preview_image_list %}
+        <div class="images-container">
+          <img src="{{preview_image_list}}" alt="NFT" class="result-image">
+          <div class="nft-name">{{brand_name}}</div>
+          <div class="nft-number">No. {{preview_image_list[-8:-4]}}</div>
+        </div>
+        {% endfor %}
+      {% endif %}
+
+    </div>
+
     <div>
       <form  method="post" action="/strike">
         <!-- <input type="number" name="imageNumber" placeholder="Number of NFT you want to Generate" value="1" min="1"></br> -->
-        <button type="submit" class="button  button-generate" value="Strike!">Strike!</button>
+        <button type="submit" class="button  button-generate" value="Strike!">Strike !</button>
       </form>
     </div>
   </div>

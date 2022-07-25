@@ -115,15 +115,26 @@ body {
   margin-top: 10px;
   background: #3266C2;
 }
+.button-download:hover {
+  background: #6B8CC8;
+}
 
 .button-mint {
-  background: #00C1A2;;
+  background: #00C1A2;
+}
+.button-mint:hover {
+  background: #92C9C0;
 }
 
 .button-generate {
   background: #FFFFFF;
   color: #3266C2;
   height: auto;
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.2);
+}
+.button-generate:hover {
+  background: #FFFFFF;
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.4);
 }
 
 input[type=number] {
@@ -167,7 +178,6 @@ input[type=text]:focus {
   .result-image {
     width: 250px;
     height: 250px;
-    border-radius: 4px;
     margin: 5px;
   }
   .nft-info {

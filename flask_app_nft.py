@@ -43,7 +43,16 @@ def checkRarity(image_number):
 
 @app.route('/', methods=["POST", "GET"])
 def home():
-  return render_template("index.html")
+  preview_image_list = []
+  # generate 6 random number for display
+  random_number_list = random.sample(range(1000), 6)
+  # append that 6 random images path to the list
+  for number in random_number_list:
+    print(number)
+    result_number = f"{number:04}"
+    preview_image_list.append(os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(result_number) + '.png'))
+
+  return render_template("index.html", preview_image_list=preview_image_list, brand_name=app.config['BRAND_NAME'])
 
 @app.route('/strike', methods=["POST"])
 def strike():
@@ -52,7 +61,7 @@ def strike():
     # generate a random numebr
     random_image_number = random.randint(0, 1000)
     global image_number
-    image_number = f"{random_image_number:04}"
+    image_number = f"{random_image_number:04}" # change the number of digit want to diplay
 
     if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')):
       print("Already have nft pool generated! no need generate nft pool again")

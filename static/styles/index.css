@@ -27,7 +27,7 @@ body {
 
 .logo {
   margin: 20px;
-  margin-top: 210px;
+  margin-top: 70px;
   max-width: 100%;
   max-height: 100%;
 }
@@ -46,6 +46,43 @@ body {
   color: #000000;
 }
 
+.image-gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  justify-content: space-around;
+}
+
+.images-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+}
+
+.nft-name {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 8px;
+  color: #757575;
+  margin: 5px 0px;
+}
+
+.nft-number {
+  font-weight: 400;
+  font-size: 8px;
+  color: #000000;
+  margin-bottom: 12px;
+}
 
 .button {
   background-color: #008CBA;
@@ -56,7 +93,7 @@ body {
   display: inline-block;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 12px;
+  border-radius: 20px;
 }
 
 .button-generate {
@@ -71,6 +108,10 @@ body {
   letter-spacing: 0.015em;
   margin-top: 24px;
   height: auto;
+}
+
+.button-generate:hover {
+  background: #4790FD
 }
 
 input[type=number] {
@@ -99,8 +140,8 @@ input[type=text]:focus {
     background-repeat: no-repeat;
   }
   .result-image {
-    width: 50%;
-    height: 50%;
+    width: 140px;
+    height: 140px;
     border-radius: 4px;
     margin: 5px;
   }
@@ -108,7 +149,20 @@ input[type=text]:focus {
     font-size: 24px;
   }
   .button-generate {
+    padding: 12px 32px;
     width: 300px;
     margin-top: 40px;
+    font-size: 20px;
+    border-radius: 16px;
+  }
+  .image-gallery-container {
+    width: 450px;
+  }
+  .nft-name {
+    font-size: 14px;
+    margin: 5px 0px;
+  }
+  .nft-number {
+    font-size: 12px;
   }
 }
