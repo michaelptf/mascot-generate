@@ -93,3 +93,6 @@ def strike():
 def download_nft():
   img_path = os.path.join('static', 'output', 'edition_' + app.config['EDITION_NAME'], 'images', 'Amuro_' + app.config['BRAND_NAME'] + '_Avatar_'+str(image_number)+'.png')
   return send_file(img_path, as_attachment=True)
+
+if __name__ == "__main__":
+  app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
