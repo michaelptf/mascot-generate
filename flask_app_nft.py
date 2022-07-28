@@ -6,7 +6,6 @@ import os
 import random
 import csv
 
-
 app = Flask(__name__)
 app.config["DEBUG"] = True
 # change the name of the brand
@@ -94,5 +93,16 @@ def download_nft():
   img_path = os.path.join('static', 'output', 'edition_' + app.config['EDITION_NAME'], 'images', 'Amuro_' + app.config['BRAND_NAME'] + '_Avatar_'+str(image_number)+'.png')
   return send_file(img_path, as_attachment=True)
 
+@app.route('/test')
+def get_time():
+  
+    # Returning an api for showing in  reactjs
+    return {
+        'Name':"geek", 
+        "Age":"22",
+        "Date":"28/7", 
+        "programming":"python"
+        }
+        
 if __name__ == "__main__":
   app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
