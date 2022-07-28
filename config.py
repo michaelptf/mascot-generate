@@ -33,7 +33,7 @@ CONFIG = [
         'name': 'Layer 2',
         'directory': 'Layer 2',
         'required': True,
-        'rarity_weights': [12, 12, 3, 6, 6, 12, 3],
+        'rarity_weights': 'random',
     },
     {
         'id': 3,

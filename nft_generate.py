@@ -211,7 +211,7 @@ def generate_images(edition, count, brand_name, drop_dup=True):
     return rarity_table
 
 # Main function. Point of entry
-def main(name_of_brand):
+def main():
 
     print("Checking assets...")
     parse_config()
@@ -243,4 +243,4 @@ def main(name_of_brand):
 
 
 # Run the main function
-# main()
+main()
