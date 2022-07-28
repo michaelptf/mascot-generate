@@ -211,7 +211,7 @@ def generate_images(edition, count, brand_name, drop_dup=True):
     return rarity_table
 
 # Main function. Point of entry
-def main(num_of_img, name_of_edition, name_of_brand):
+def main(name_of_brand):
 
     print("Checking assets...")
     parse_config()
@@ -222,17 +222,17 @@ def main(num_of_img, name_of_edition, name_of_brand):
     print("You can create a total of %i distinct avatars" % (tot_comb))
     print()
 
-    # print("How many avatars would you like to create? Enter a number greater than 0: ")
-    # while True:
-    #     num_avatars = int(input())
-    #     if num_avatars > 0:
-    #         break
+    print("How many avatars would you like to create? Enter a number greater than 0: ")
+    while True:
+        num_avatars = int(input())
+        if num_avatars > 0:
+            break
+    print("What would you like to call this brand?: ")
+    name_of_brand = input()
 
-    # print("What would you like to call this edition?: ")
-    # edition_name = input()
+    print("What would you like to call this edition?: ")
+    edition_name = input()
 
-    edition_name = name_of_edition
-    num_avatars = int(num_of_img)
     print("Starting task...")
     rt = generate_images(edition_name, num_avatars, name_of_brand)
 
