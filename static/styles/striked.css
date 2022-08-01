@@ -96,7 +96,7 @@ body {
 
 .button {
   border: none;
-  padding: 10px 32px;
+  padding: 14px 32px;
   margin: 8px 2px;
   width: 182px;
   border-radius: 12px;
@@ -281,7 +281,7 @@ input[type=text]:focus {
     width: 420px;
   }
   .button-download {
-    padding: 10px 24px;
+    padding: 14px 24px;
   }
   .modal-content {
     width: 70%;
@@ -293,5 +293,9 @@ input[type=text]:focus {
   }
   .modal-divider{
     width: 60%;
+  }
+  .framed-image {
+    width: 250px;
+    height: auto;
   }
 }
