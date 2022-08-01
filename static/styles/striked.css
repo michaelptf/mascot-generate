@@ -47,7 +47,7 @@ body {
 
 .result-image {
   width: 75%;
-  height: 75%;
+  height: auto;
   border-radius: 4px;
 }
 
@@ -78,11 +78,11 @@ body {
   margin: 16px 0px;
 }
 
-.super-rare {
+.supreme {
   background: linear-gradient(90deg, #FE617F 0%, #C274B2 52.43%, #6179DD 100%);
   color: #FFFFFF;
 }
-.rare {
+.super-rare {
   background: linear-gradient(90deg, #9F3B4E 0%, #7C4771 52.43%, #4A5DAA 100%);
   color: #FFFFFF;
 }
@@ -126,15 +126,87 @@ body {
   background: #92C9C0;
 }
 
+.button-add-frame {
+  margin-top: 10px;
+  background: #FF9632;
+  font-family: 'Montserrat';
+}
+
 .button-generate {
   background: #FFFFFF;
   color: #3266C2;
   height: auto;
   box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 }
 .button-generate:hover {
   background: #FFFFFF;
   box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 50px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.2); /* Black w/ opacity */
+}
+
+.modal-content {
+  border-radius: 26px;
+  background: linear-gradient(103.33deg, #D6DDEB 0%, #F0EDF3 51.54%, #EDE2F5 98.97%);
+  position: relative;
+  margin: auto;
+  width: 90%;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  color: #3266C2;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  position: absolute;
+  right: 0;
+  font-size: 28px;
+  font-weight: normal;
+  cursor: pointer;
+  margin: 8px 16px;
+}
+
+.framed-image {
+  width: 220px;
+  height: auto;
+}
+.modal-divider{
+  width: 80%;
+}
+.button-download-frame {
+  background: #3266C2;
+  margin: 26px;
 }
 
 input[type=number] {
@@ -189,7 +261,7 @@ input[type=text]:focus {
   .divider{
     border: 1px solid #DCD9EE;
     margin: 26px 0px;
-    width: 444px;
+    width: 634px;
   }
   .button-container {
     display: flex;
@@ -197,7 +269,7 @@ input[type=text]:focus {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    width: 444px;
+    width: 634px;
   }
   .button {
     width: 200px;
@@ -207,5 +279,19 @@ input[type=text]:focus {
   .button-generate {
     order: 2;
     width: 420px;
+  }
+  .button-download {
+    padding: 10px 24px;
+  }
+  .modal-content {
+    width: 70%;
+  }
+  .button-download-frame {
+    width: 350px;
+    margin-top: 0px;
+    margin-bottom: 26px;
+  }
+  .modal-divider{
+    width: 60%;
   }
 }

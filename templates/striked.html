@@ -3,6 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/striked.css') }}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
@@ -15,7 +16,7 @@
     <!-- show result image -->
     {% if result_image %}
       <div class="nft-container">
-          <img src="{{result_image}}" alt="NFT" class="result-image" height="400px" width="400px">
+          <img src="{{result_image}}" alt="NFT" class="result-image">
           <div class="nft-info-container">
             <div class="nft-info">{{brand_name}} #{{image_number}}</div>
             <div class="nft-info">{{edition_name}} Edition 1/1</div>
@@ -24,33 +25,63 @@
       </div>
     {% endif %}
 
-    <!-- show images in image list-->
-    <!-- {% if result_image_list %}
-      {% for result_image_list in result_image_list %}
-      <div class="nft-container">
-        <img src="{{ url_for('static', filename=result_image_list)}}" alt="NFT" class="result-image" height="400px" width="400px">
-        <div class="nft-info-container">
-          <div class="nft-info">Gump #{{image_number}}</div>
-          <div class="nft-info">Limited Edition 1/1</div>
-          <div class="nft-info rarity-box">SUPER RARE</div>
-        </div>
-      </div>
-      {% endfor %}
-    {% endif %} -->
-
     <!-- divider bar -->
     <div class="divider"></div>
 
     <!-- button group -->
     <div class="button-container">
-      <a href="{{url_for('download_nft')}}" class="button button-download">Download</a>
+      <a href="{{url_for('download_nft')}}" class="button button-download">Download Avatar</a>
       <a href="#" class="button button-mint ">Mint as NFT</a>
+      <button class="button button-add-frame" id="add-frame">Add Frame</button>
       <form  method="post" action="/strike">
         <!-- <input type="number" name="imageNumber" placeholder="Number of NFT you want to Generate" value="1" min="1"></br> -->
-        <button type="submit" class="button button-generate" value="Strike again!">Strike again !</button>
+        <button type="submit" class="button button-generate" value="Strike again!"><i class="material-icons" style="font-size:20px">cached</i> Strike again !</button>
       </form>
     </div>
+
+    <!-- Popup Modal -->
+    <div id="popup-modal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="flexbox-container">
+          <h3 class="popup-title">#1 Frame</h3>
+          <img src="{{framed_image}}" alt="NFT" class="framed-image">
+          <div class="divider modal-divider"></div>
+          <a href="{{url_for('download_nft_framed')}}" class="button button-download-frame">Download Frame with Avatar</a>  
+        </div>
+      </div>
+    </div>
+
   </div>
 
+  <!-- Popup script -->
+  <script>
+    // Get the modal
+    var modal = document.getElementById("popup-modal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("add-frame");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>
 </body>
 </html>

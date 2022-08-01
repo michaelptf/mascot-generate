@@ -5,6 +5,7 @@ from nft_generate import main
 import os
 import random
 import csv
+from PIL import Image, ImageDraw
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -31,14 +32,29 @@ def checkRarity(image_number):
     # get the specific nft row
     result_row = rows[nft_id+1]
 
+    # change accroding to config.py
     if(result_row[2] == '91' or result_row[2] == '197'):
-      return "SUPER RARE"
+      return "SUPREME"
     elif(result_row[2] == '108' or result_row[2] =='118'):
-      return "RARE"
+      return "SUPER RARE"
     elif(result_row[2] == '60' or result_row[2] =='71' or result_row[2] =='141'):
-      return "COMMON"
+      return "RARE"
     
+def paste_nft_to_frame():
+  # get the image open
+  nft_frame = Image.open('static/images/Gump 2 (front).png')
+  nft_image = Image.open(result_image)
+  # make a copy and resize image
+  nft_frame_copy = nft_frame.copy()
+  nft_image_copy = nft_image.copy().resize((904, 904))
+  # make the nft rounder
+  mask_image = Image.new("L", nft_image_copy.size, 0)
+  draw = ImageDraw.Draw(mask_image)
+  draw.rounded_rectangle((0, 0, 904, 904), radius=48, fill=255)
+  mask_image.save("static/images/mask_image.png", quality=95)
 
+  nft_frame_copy.paste(nft_image_copy, (102, 118), mask_image)
+  nft_frame_copy.save(os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png'))
 
 @app.route('/', methods=["POST", "GET"])
 def home():
@@ -72,30 +88,37 @@ def strike():
       main(number_of_image, app.config['EDITION_NAME'], app.config['BRAND_NAME'])
 
     # get the nft image path
+    global result_image
     result_image = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
-
+    paste_nft_to_frame()
     # check the rarity of the nft
     rarity_text = checkRarity(random_image_number)
-    if(rarity_text == "SUPER RARE"):
+    if(rarity_text == "SUPREME"):
+      rarity='supreme'
+    elif(rarity_text == "SUPER RARE"):
       rarity='super-rare'
-    elif(rarity_text == "RARE"):
-      rarity='rare'
     else:
       rarity=''
     
+    framed_image = os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
     # show mutiple of image
     # image_list = os.listdir(app.config['UPLOAD_FOLDER'])
     # result_image_list = ['output/edition_img_output/images/' + image for image in image_list]
-    return render_template("striked.html", result_image=result_image, image_number=image_number, brand_name=app.config['BRAND_NAME'], edition_name=app.config['EDITION_NAME'], rarity_box=rarity,rarity_text=rarity_text)
+    return render_template("striked.html", framed_image=framed_image, result_image=result_image , image_number=image_number, brand_name=app.config['BRAND_NAME'], edition_name=app.config['EDITION_NAME'], rarity_box=rarity,rarity_text=rarity_text)
 
 @app.route('/download')
 def download_nft():
-  img_path = os.path.join('static', 'output', 'edition_' + app.config['EDITION_NAME'], 'images', 'Amuro_' + app.config['BRAND_NAME'] + '_Avatar_'+str(image_number)+'.png')
+  img_path = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_' + app.config['BRAND_NAME'] + '_Avatar_'+str(image_number)+'.png')
+  return send_file(img_path, as_attachment=True)
+
+@app.route('/download_framed')
+def download_nft_framed():
+  img_path = os.path.join(app.config['UPLOAD_FOLDER'], 'Framed_Amuro_' + app.config['BRAND_NAME'] + '_Avatar_'+str(image_number)+'.png')
   return send_file(img_path, as_attachment=True)
 
 @app.route('/test')
 def get_time():
-    result_image = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
+    # result_image = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
 
     # Returning an api for showing in  reactjs
     return {
