@@ -69,10 +69,9 @@ def home():
 
   return render_template("index.html", preview_image_list=preview_image_list, brand_name=app.config['BRAND_NAME'])
 
-@app.route('/strike', methods=["POST"])
+@app.route('/strike', methods=["POST", "GET"])
 def strike():
   
-  if request.method == "POST":
     # generate a random numebr
     random_image_number = random.randint(0, 1000)
     global image_number

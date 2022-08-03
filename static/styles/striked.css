@@ -160,6 +160,7 @@ body {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.2); /* Black w/ opacity */
+  font-family: 'Montserrat';
 }
 
 .modal-content {
@@ -196,7 +197,15 @@ body {
   cursor: pointer;
   margin: 8px 16px;
 }
-
+.back {
+  color: #77747B;
+  position: absolute;
+  left: 0;
+  font-size: 32px;
+  font-weight: normal;
+  cursor: pointer;
+  margin: 12px 16px;
+}
 .framed-image {
   width: 220px;
   height: auto;
@@ -207,6 +216,31 @@ body {
 .button-download-frame {
   background: #3266C2;
   margin: 26px;
+}
+.button-share {
+  background: #8D4CF7;
+}
+.share-modal {
+  display: none;
+}
+
+.share-modal .framed-image {
+  margin: 38px 24px;
+}
+.popup-title {
+  font-size: 24px;
+}
+.share-method {
+  font-weight: 600;
+  font-size: 12px;
+  margin: 16px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.social-icon {
+  margin-right: 24px;
 }
 
 input[type=number] {
@@ -260,7 +294,7 @@ input[type=text]:focus {
   }
   .divider{
     border: 1px solid #DCD9EE;
-    margin: 26px 0px;
+    margin: 21px 0px;
     width: 634px;
   }
   .button-container {
@@ -285,11 +319,25 @@ input[type=text]:focus {
   }
   .modal-content {
     width: 70%;
+    height: 640px;
+  }
+  .modal-button-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 430px;
   }
   .button-download-frame {
-    width: 350px;
-    margin-top: 0px;
-    margin-bottom: 26px;
+    width: 187px;
+    margin: 12px;
+    margin-bottom: 24px;
+  }
+  .button-share {
+    width: 187px;
+    margin: 12px;
+    margin-bottom: 24px;
   }
   .modal-divider{
     width: 60%;
