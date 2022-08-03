@@ -5,7 +5,7 @@ from nft_generate import main
 import os
 import random
 import csv
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -21,6 +21,8 @@ app.config['UPLOAD_FOLDER'] = img_folder
 # change the path where the output csv file will be
 csvfile_path = os.path.join('static', 'output', 'edition_' + edition_name, 'metadata.csv')
 app.config['CSV_PATH'] = csvfile_path
+nft_card_caption = "Gump Test NFT Series #1 Frame"
+app.config['CAPTION'] = nft_card_caption
 
 def checkRarity(image_number):
   # get the nft number
@@ -42,18 +44,38 @@ def checkRarity(image_number):
     
 def paste_nft_to_frame():
   # get the image open
-  nft_frame = Image.open('static/images/Gump 2 (front).png')
+  nft_frame = Image.open('static/images/Gump nft frame clean.png')
   nft_image = Image.open(result_image)
+  edition_image = Image.open('static/images/Edition.png')
+  rarity = checkRarity(random_image_number)
+
+  rarity_image = Image.open(os.path.join('static', 'images', rarity + '.png'))
+  
+  ratio = int(168/edition_image.height)
   # make a copy and resize image
   nft_frame_copy = nft_frame.copy()
-  nft_image_copy = nft_image.copy().resize((904, 904))
+  nft_image_copy = nft_image.copy().resize((1810, 1810))
+  edition_image_copy =  edition_image.copy().resize((edition_image.width*ratio, edition_image.height*ratio))
+  rarity_image_copy = rarity_image.copy().resize((rarity_image.width*ratio, rarity_image.height*ratio))
+
   # make the nft rounder
   mask_image = Image.new("L", nft_image_copy.size, 0)
   draw = ImageDraw.Draw(mask_image)
-  draw.rounded_rectangle((0, 0, 904, 904), radius=48, fill=255)
+  draw.rounded_rectangle((0, 0, 1810, 1810), radius=96, fill=255)
   mask_image.save("static/images/mask_image.png", quality=95)
 
-  nft_frame_copy.paste(nft_image_copy, (102, 118), mask_image)
+  nft_frame_copy.paste(nft_image_copy, (200, 234), mask_image)
+  nft_frame_copy.paste(edition_image_copy, (180, 2750))
+  nft_frame_copy.paste(rarity_image_copy, (950, 2750))
+
+  font_title = ImageFont.truetype('static/styles/Montserrat-Regular.ttf', 150)
+  font_caption = ImageFont.truetype('static/styles/Montserrat-Regular.ttf', 75)
+  title = "#" + str(image_number) + " " + app.config['BRAND_NAME']
+  caption = app.config['CAPTION']
+  image_editable = ImageDraw.Draw(nft_frame_copy)
+  image_editable.text((186,2400), title, (255, 255, 255), font=font_title)
+  image_editable.text((186,2600), caption, (255, 255, 255), font=font_caption)
+
   nft_frame_copy.save(os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png'))
 
 @app.route('/', methods=["POST", "GET"])
@@ -73,6 +95,7 @@ def home():
 def strike():
   
     # generate a random numebr
+    global random_image_number
     random_image_number = random.randint(0, 1000)
     global image_number
     image_number = f"{random_image_number:04}" # change the number of digit want to diplay
