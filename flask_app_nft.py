@@ -147,11 +147,7 @@ def get_time():
     # Returning an api for showing in  reactjs
     return {
         "brandName":app.config['BRAND_NAME'], 
-        "nft_id":image_number,
         "edition_name":app.config['EDITION_NAME'],
-        "rarity": rarity_text,
-        "Result_image": result_image
-
         }
         
 if __name__ == "__main__":
