@@ -143,7 +143,7 @@ def download_nft_framed():
 @app.route('/strike_test', methods=["GET"])
 def get_time():
     # result_image = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
-    rarity_text = checkRarity(random_image_number)
+
     # Returning an api for showing in  reactjs
     return {
         "brandName":app.config['BRAND_NAME'], 
