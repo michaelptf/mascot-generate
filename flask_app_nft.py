@@ -46,11 +46,13 @@ def paste_nft_to_frame():
   # get the image open
   nft_frame = Image.open('static/images/Gump nft frame clean.png')
   nft_image = Image.open(result_image)
+  # open the edition tag that will be pasted on the frame
   edition_image = Image.open('static/images/Edition.png')
+  # check the rarity then open the corresponding tag image
   rarity = checkRarity(random_image_number)
-
   rarity_image = Image.open(os.path.join('static', 'images', rarity + '.png'))
   
+  # calculate the ratio of wanted tag size to image size
   ratio = int(168/edition_image.height)
   # make a copy and resize image
   nft_frame_copy = nft_frame.copy()
@@ -64,10 +66,12 @@ def paste_nft_to_frame():
   draw.rounded_rectangle((0, 0, 1810, 1810), radius=96, fill=255)
   mask_image.save("static/images/mask_image.png", quality=95)
 
+  # paste different component to the frame
   nft_frame_copy.paste(nft_image_copy, (200, 234), mask_image)
   nft_frame_copy.paste(edition_image_copy, (180, 2750))
   nft_frame_copy.paste(rarity_image_copy, (950, 2750))
 
+  #define thw font to be used and paste them to the frame  
   font_title = ImageFont.truetype('static/styles/Montserrat-Regular.ttf', 150)
   font_caption = ImageFont.truetype('static/styles/Montserrat-Regular.ttf', 75)
   title = "#" + str(image_number) + " " + app.config['BRAND_NAME']
@@ -75,7 +79,8 @@ def paste_nft_to_frame():
   image_editable = ImageDraw.Draw(nft_frame_copy)
   image_editable.text((186,2400), title, (255, 255, 255), font=font_title)
   image_editable.text((186,2600), caption, (255, 255, 255), font=font_caption)
-
+  
+  # save the image
   nft_frame_copy.save(os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png'))
 
 @app.route('/', methods=["POST", "GET"])
@@ -123,9 +128,6 @@ def strike():
       rarity=''
     
     framed_image = os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
-    # show mutiple of image
-    # image_list = os.listdir(app.config['UPLOAD_FOLDER'])
-    # result_image_list = ['output/edition_img_output/images/' + image for image in image_list]
     return render_template("striked.html", framed_image=framed_image, result_image=result_image , image_number=image_number, brand_name=app.config['BRAND_NAME'], edition_name=app.config['EDITION_NAME'], rarity_box=rarity,rarity_text=rarity_text)
 
 @app.route('/download')
