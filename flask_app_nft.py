@@ -141,14 +141,22 @@ def download_nft_framed():
   return send_file(img_path, as_attachment=True)
 
 @app.route('/strike_test', methods=["GET"])
-def get_time():
+def get_info():
     # result_image = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
+    img_path = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_' + app.config['BRAND_NAME'] + '_Avatar_'+'0000'+'.png')
 
     # Returning an api for showing in  reactjs
     return {
-        "brandName":app.config['BRAND_NAME'], 
-        "edition_name":app.config['EDITION_NAME'],
+        "image path": img_path
         }
+
+@app.route('/strike_test2', methods=["GET"])
+def get_image():
+    # result_image = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
+    img_path = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_' + app.config['BRAND_NAME'] + '_Avatar_'+'0000'+'.png')
+
+    # Returning an api for showing in  reactjs
+    return send_file(img_path, mimetype='image/png')
         
 if __name__ == "__main__":
   app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
