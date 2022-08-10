@@ -23,58 +23,103 @@
 CONFIG = [
     {
         'id': 1,
-        'name': 'background',
-        'directory': 'BG',
+        'name': 'layer1',
+        'directory': 'fimmick-cmi/rare/Layer1',
         'required': True,
-        'rarity_weights': 'random',
+        'rarity_weights': None,
     },
     {
         'id': 2,
-        'name': 'body',
-        'directory': 'body',
+        'name': 'layer2',
+        'directory': 'fimmick-cmi/rare/Layer2',
         'required': True,
-        'rarity_weights': [12, 12, 3, 6, 6, 12, 3],
+        'rarity_weights': None,
     },
     {
         'id': 3,
-        'name': 'hair',
-        'directory': 'hair',
+        'name': 'layer3',
+        'directory': 'fimmick-cmi/rare/Layer3',
         'required': True,
-        'rarity_weights': 'random',
+        'rarity_weights': None,
     },
     {
         'id': 4,
-        'name': 'clothes',
-        'directory': 'clothes',
+        'name': 'layer4',
+        'directory': 'fimmick-cmi/rare/Layer4',
         'required': True,
-        'rarity_weights': 'random',
+        'rarity_weights': None,
     },
     {
         'id': 5,
-        'name': 'accessories/jewelry',
-        'directory': 'Accessories_Jewelry',
-        'required': False,
-        'rarity_weights': 'random',
-    },
-    {
-        'id': 6,
-        'name': 'glasses',
-        'directory': 'Glasses_Shades',
-        'required': False,
-        'rarity_weights': 'random',
-    },
-    {
-        'id': 7,
-        'name': 'hat/headband',
-        'directory': 'Hat_Headband',
-        'required': False,
-        'rarity_weights': 'random',
-    },
-    {
-        'id': 8,
-        'name': 'photography accessories(front)',
-        'directory': 'Photography_Accessories',
+        'name': 'layer5',
+        'directory': 'fimmick-cmi/rare/Layer5',
         'required': True,
-        'rarity_weights': 'random',
-    },
+        'rarity_weights': None,
+    }
 ]
+
+#
+#
+#  Config Example:
+#
+#
+#
+# CONFIG = [
+#     {
+#         'id': 1,
+#         'name': 'background',
+#         'directory': 'BG',
+#         'required': True,
+#         'rarity_weights': 'random',
+#     },
+#     {
+#         'id': 2,
+#         'name': 'body',
+#         'directory': 'body',
+#         'required': True,
+#         'rarity_weights': [12, 12, 3, 6, 6, 12, 3],
+#     },
+#     {
+#         'id': 3,
+#         'name': 'hair',
+#         'directory': 'hair',
+#         'required': True,
+#         'rarity_weights': 'random',
+#     },
+#     {
+#         'id': 4,
+#         'name': 'clothes',
+#         'directory': 'clothes',
+#         'required': True,
+#         'rarity_weights': 'random',
+#     },
+#     {
+#         'id': 5,
+#         'name': 'accessories/jewelry',
+#         'directory': 'Accessories_Jewelry',
+#         'required': False,
+#         'rarity_weights': 'random',
+#     },
+#     {
+#         'id': 6,
+#         'name': 'glasses',
+#         'directory': 'Glasses_Shades',
+#         'required': False,
+#         'rarity_weights': 'random',
+#     },
+#     {
+#         'id': 7,
+#         'name': 'hat/headband',
+#         'directory': 'Hat_Headband',
+#         'required': False,
+#         'rarity_weights': 'random',
+#     },
+#     {
+#         'id': 8,
+#         'name': 'photography accessories(front)',
+#         'directory': 'Photography_Accessories',
+#         'required': True,
+#         'rarity_weights': 'random',
+#     },
+# ]
+

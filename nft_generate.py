@@ -8,7 +8,7 @@ import numpy as np
 import time
 import os
 import random
-from progressbar import progressbar
+import progressbar
 
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -57,6 +57,9 @@ def parse_config():
         layer['rarity_weights'] = rarities
         layer['cum_rarity_weights'] = np.cumsum(rarities)
         layer['traits'] = traits
+        layer['num_of_traits'] = len(traits)
+
+        print(layer)
 
 
 # Weight rarities and return a numpy array that sums up to 1
@@ -64,7 +67,7 @@ def get_weighted_rarities(arr):
     return np.array(arr)/ sum(arr)
 
 # Generate a single image given an array of filepaths representing layers
-def generate_single_image(filepaths, output_filename=None):
+def generate_single_image(filepaths, output_filename=None, compression_ratio = 1):
 
     # Treat the first layer as the background
     bg = Image.open(os.path.join(parent_dir, 'assets', filepaths[0]))
@@ -75,6 +78,13 @@ def generate_single_image(filepaths, output_filename=None):
         if filepath.endswith('.png'):
             img = Image.open(os.path.join(parent_dir, 'assets', filepath))
             bg.paste(img, (0,0), img)
+
+    if compression_ratio != 1:
+        width, height = bg.size
+        compression_ratio = 0.5
+        newWidth = int(width * compression_ratio)
+        newHeight = int(height * compression_ratio)
+        bg = bg.resize((newWidth, newHeight))
 
     # Save the final image into desired location
     if output_filename is not None:
@@ -117,9 +127,37 @@ def select_index(cum_rarities, rand):
     # Should not reach here if everything works okay
     return None
 
+# Generate a random set of traits given rarities
+def generate_predefined_trait_set_from_config(trait_indexes):
 
-# Generate a set of traits given rarities
-def generate_trait_set_from_config():
+    trait_set = []
+    trait_paths = []
+
+    current_layer = 0
+    for layer in CONFIG:
+        # Extract list of traits and cumulative rarity weights
+        traits, cum_rarities = layer['traits'], layer['cum_rarity_weights']
+
+        # Find the index of the current layer
+        idx = trait_indexes[current_layer]
+
+        # # Select an element index based on random number and cumulative rarity weights
+        # idx = select_index(cum_rarities, index)
+
+        # Add selected trait to trait set
+        trait_set.append(traits[idx])
+
+        # Add trait path to trait paths if the trait has been selected
+        if traits[idx] is not None:
+            trait_path = os.path.join(layer['directory'], traits[idx])
+            trait_paths.append(trait_path)
+
+        current_layer = current_layer + 1
+
+    return trait_set, trait_paths
+
+# Generate a random set of traits given rarities
+def generate_random_trait_set_from_config():
 
     trait_set = []
     trait_paths = []
@@ -146,7 +184,7 @@ def generate_trait_set_from_config():
 
 
 # Generate the image set. Don't change drop_dup
-def generate_images(edition, count, brand_name, drop_dup=True):
+def generate_images(edition, count, brand_name, is_random, compression_ratio, drop_dup=True):
 
     # Initialize an empty rarity table
     rarity_table = {}
@@ -166,24 +204,66 @@ def generate_images(edition, count, brand_name, drop_dup=True):
     if not os.path.exists(op_path):
         os.makedirs(op_path)
 
-    # Create the images
-    for n in progressbar(range(count)):
 
-        # Set image name
-        image_name = str(n).zfill(zfill_count) + '.png'
+    generated_count = 0
+    bar = progressbar.ProgressBar(max_value=count)
+    if is_random:
+         # Create ramdom images
+        for n in range(count):
 
-        # Get a random set of valid traits based on rarity weights
-        trait_sets, trait_paths = generate_trait_set_from_config()
+            # Set image name
+            image_name = str(n).zfill(zfill_count) + '.png'
 
-        # Generate the actual image
-        generate_single_image(trait_paths, os.path.join(op_path, image_name))
+            # Get a random set of valid traits based on rarity weights
+            trait_sets, trait_paths = generate_random_trait_set_from_config()
 
-        # Populate the rarity table with metadata of newly created image
-        for idx, trait in enumerate(trait_sets):
-            if trait is not None:
-                rarity_table[CONFIG[idx]['name']].append(trait[: -1 * len('.png')])
-            else:
-                rarity_table[CONFIG[idx]['name']].append('none')
+            # Generate the actual image
+            generate_single_image(trait_paths, os.path.join(op_path, image_name), compression_ratio)
+
+            # Populate the rarity table with metadata of newly created image
+            for idx, trait in enumerate(trait_sets):
+                if trait is not None:
+                    rarity_table[CONFIG[idx]['name']].append(trait[: -1 * len('.png')])
+                else:
+                    rarity_table[CONFIG[idx]['name']].append('none')
+
+            
+            generated_count = generated_count + 1
+            bar.update(generated_count)
+    
+    else:
+        # BIG ASSUMPTION!! Assume there are always 5 layers.
+        LAYER_1_COUNT = 2
+        LAYER_2_COUNT = 1
+        LAYER_3_COUNT = 5
+        LAYER_4_COUNT = 5
+        LAYER_5_COUNT = 1
+
+        bar = progressbar.ProgressBar(max_value=count)
+        for i1 in range(LAYER_1_COUNT):
+            for i2 in range(LAYER_2_COUNT):
+                for i3 in range(LAYER_3_COUNT):
+                    for i4 in range(LAYER_4_COUNT):
+                        for i5 in range(LAYER_5_COUNT):
+
+                            # Set image name
+                            image_name = str(generated_count).zfill(zfill_count) + '.png'
+
+                            # Get a random set of valid traits based on rarity weights
+                            trait_sets, trait_paths = generate_predefined_trait_set_from_config([i1, i2, i3, i4, i5])
+
+                            # Generate the actual image
+                            generate_single_image(trait_paths, os.path.join(op_path, image_name), compression_ratio)
+
+                            # Populate the rarity table with metadata of newly created image
+                            for idx, trait in enumerate(trait_sets):
+                                if trait is not None:
+                                    rarity_table[CONFIG[idx]['name']].append(trait[: -1 * len('.png')])
+                                else:
+                                    rarity_table[CONFIG[idx]['name']].append('none')
+                            
+                            generated_count = generated_count + 1
+                            bar.update(generated_count)
 
     # Create the final rarity table by removing duplicate creat
     rarity_table = pd.DataFrame(rarity_table).drop_duplicates()
@@ -211,7 +291,7 @@ def generate_images(edition, count, brand_name, drop_dup=True):
     return rarity_table
 
 # Main function. Point of entry
-def main(num_of_img, name_of_edition, name_of_brand):
+def main(num_of_img, name_of_edition, name_of_brand, is_random, compression_ratio):
 
     print("Checking assets...")
     parse_config()
@@ -234,7 +314,7 @@ def main(num_of_img, name_of_edition, name_of_brand):
     edition_name = name_of_edition
     num_avatars = int(num_of_img)
     print("Starting task...")
-    rt = generate_images(edition_name, num_avatars, name_of_brand)
+    rt = generate_images(edition_name, num_avatars, name_of_brand, is_random, compression_ratio)
 
     print("Saving metadata...")
     rt.to_csv(os.path.join('static', 'output', 'edition_' +  str(edition_name), 'metadata.csv'))
@@ -243,4 +323,4 @@ def main(num_of_img, name_of_edition, name_of_brand):
 
 
 # Run the main function
-# main()
+# main(50, "v8_rare", "amuro", False, 0.5)
