@@ -1,6 +1,6 @@
 
 from asyncore import read
-from flask import Flask, request, render_template, send_file
+from flask import Flask, request, render_template, send_file, url_for
 from nft_generate import main
 import os
 import random
@@ -147,7 +147,7 @@ def get_info():
 
     # Returning an api for showing in  reactjs
     return {
-        "image path": img_path
+        "image path": request.host_url + "/" + img_path
         }
 
 @app.route('/strike_test2', methods=["GET"])
