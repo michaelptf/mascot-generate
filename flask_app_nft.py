@@ -111,7 +111,7 @@ def strike():
       print("Start generate function")
       global number_of_image
       number_of_image = request.form["imageNumber"]
-      number_of_image = 3000 #<-change this number to generate number of image 
+      number_of_image = 100 #<-change this number to generate number of image 
       main(number_of_image, app.config['EDITION_NAME'], app.config['BRAND_NAME'])
 
     # get the nft image path
@@ -140,23 +140,49 @@ def download_nft_framed():
   img_path = os.path.join(app.config['UPLOAD_FOLDER'], 'Framed_Amuro_' + app.config['BRAND_NAME'] + '_Avatar_'+str(image_number)+'.png')
   return send_file(img_path, as_attachment=True)
 
-@app.route('/strike_test', methods=["GET"])
+@app.route('/strike_api', methods=["GET"])
 def get_info():
-    # result_image = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
-    img_path = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_' + app.config['BRAND_NAME'] + '_Avatar_'+'0000'+'.png')
+    # generate a random numebr
+    global random_image_number
+    random_image_number = random.randint(0, 1000)
+    global image_number
+    image_number = f"{random_image_number:04}" # change the number of digit want to diplay
+
+    if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')):
+      print("Already have nft pool generated! no need generate nft pool again")
+    else :
+      print("Start generate function")
+      global number_of_image
+      number_of_image = request.form["imageNumber"]
+      number_of_image = 100 #<-change this number to generate number of image 
+      main(number_of_image, app.config['EDITION_NAME'], app.config['BRAND_NAME'])
+
+    # get the nft image path
+    global result_image
+    result_image = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
+    paste_nft_to_frame()
+    # check the rarity of the nft
+    rarity_text = checkRarity(random_image_number)
+    if(rarity_text == "SUPREME"):
+      rarity='supreme'
+    elif(rarity_text == "SUPER RARE"):
+      rarity='super-rare'
+    else:
+      rarity=''
+    
+    framed_image = os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
 
     # Returning an api for showing in  reactjs
     return {
-        "image path": request.host_url + "/" + img_path
-        }
+      'framed_image': request.host_url + '/' + framed_image, 
+      'result_image': request.host_url + '/' + result_image , 
+      'image_number': image_number, 
+      'brand_name': app.config['BRAND_NAME'], 
+      'edition_name': app.config['EDITION_NAME'], 
+      'rarity_box': rarity,
+      'rarity_text': rarity_text
+    }
 
-@app.route('/strike_test2', methods=["GET"])
-def get_image():
-    # result_image = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
-    img_path = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_' + app.config['BRAND_NAME'] + '_Avatar_'+'0000'+'.png')
 
-    # Returning an api for showing in  reactjs
-    return send_file(img_path, mimetype='image/png')
-        
 if __name__ == "__main__":
   app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))

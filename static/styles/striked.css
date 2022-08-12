@@ -213,12 +213,22 @@ body {
 .modal-divider{
   width: 80%;
 }
+.modal-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 430px;
+}
 .button-download-frame {
   background: #3266C2;
   margin: 26px;
+  margin-bottom: 8px;
 }
 .button-share {
   background: #8D4CF7;
+  margin-bottom: 24px;
 }
 .share-modal {
   display: none;
@@ -295,15 +305,15 @@ input[type=text]:focus {
   .divider{
     border: 1px solid #DCD9EE;
     margin: 21px 0px;
-    width: 634px;
+    width: 424px;
   }
   .button-container {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    width: 634px;
+    width: 424px;
   }
   .button {
     width: 200px;
@@ -322,12 +332,7 @@ input[type=text]:focus {
     height: 640px;
   }
   .modal-button-container {
-    display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    width: 430px;
   }
   .button-download-frame {
     width: 187px;
