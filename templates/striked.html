@@ -50,7 +50,7 @@
           <div class="divider modal-divider"></div>
           <div class="modal-button-container">
             <a href="{{url_for('download_nft_framed')}}" class="button button-download-frame">Download</a> 
-            <button class="button button-share" id="share">Share</button>
+            <!-- <button class="button button-share" disable id="share">Share</button> -->
           </div>
         </div>
 
@@ -60,7 +60,8 @@
             <h3 class="popup-title">Share on Social Media</h3>
             <div class="nft-container">
               <img src="{{framed_image}}" alt="NFT" class="framed-image">
-              <div class="flexbox-container">
+
+              <!-- <div class="flexbox-container">
                 <div class="share-method">      
                   <img src="{{url_for('static',filename='images/whatsapp.png')}}" class="social-icon" alt="logo">
                     Share on Whatsapp
@@ -73,7 +74,8 @@
                   <img src="{{url_for('static',filename='images/facebook.png')}}" class="social-icon" alt="logo">
                   Share on Facebook
                 </div>
-              </div>
+              </div> -->
+
             </div>  
           </div>
         </div>
@@ -87,31 +89,31 @@
   <script>
     // Get the modal
     var modal = document.getElementById("popup-modal");
-    var modalShare = document.getElementById("share-modal");
+    // var modalShare = document.getElementById("share-modal");
     var modalFrame = document.getElementById("frame-modal");
     // Get the button that opens the modal
     var btn = document.getElementById("add-frame");
-    var btnShare = document.getElementById("share");
+    // var btnShare = document.getElementById("share");
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
-    var spanBack = document.getElementsByClassName("back")[0];
+    // var spanBack = document.getElementsByClassName("back")[0];
     // When the user clicks the button, open the modal 
     btn.onclick = function() {
       modal.style.display = "block";
     }
-    btnShare.onclick = function() {
-      modalShare.style.display = "block";
-      modalFrame.style.display = "none";
-    }
+    // btnShare.onclick = function() {
+    //   modalShare.style.display = "block";
+    //   modalFrame.style.display = "none";
+    // }
     
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
       modal.style.display = "none";
     }
-    spanBack.onclick = function() {
-      modalShare.style.display = "none";
-      modalFrame.style.display = "flex";
-    }
+    // spanBack.onclick = function() {
+    //   modalShare.style.display = "none";
+    //   modalFrame.style.display = "flex";
+    // }
     
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
