@@ -21,7 +21,7 @@ app.config['UPLOAD_FOLDER'] = img_folder
 # change the path where the output csv file will be
 csvfile_path = os.path.join('static', 'output', 'edition_' + edition_name, 'metadata.csv')
 app.config['CSV_PATH'] = csvfile_path
-nft_card_caption = "Gump Test NFT Series #1 Frame"
+nft_card_caption = "Gump NFT Series"
 app.config['CAPTION'] = nft_card_caption
 
 def checkRarity(image_number):
