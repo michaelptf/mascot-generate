@@ -174,8 +174,8 @@ def get_info():
 
     # Returning an api for showing in  reactjs
     return {
-      'framed_image': request.host_url + '/' + framed_image, 
-      'result_image': request.host_url + '/' + result_image , 
+      'framed_image': request.host_url + framed_image, 
+      'result_image': request.host_url + result_image , 
       'image_number': image_number, 
       'brand_name': app.config['BRAND_NAME'], 
       'edition_name': app.config['EDITION_NAME'], 
