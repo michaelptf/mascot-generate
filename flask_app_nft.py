@@ -142,6 +142,16 @@ def download_nft_framed():
 
 @app.route('/strike_api', methods=["GET"])
 def get_info():
+    # for hompage 
+    preview_image_list = []
+    # generate 6 random number for display
+    random_number_list = random.sample(range(1000), 6)
+    # append that 6 random images path to the list
+    for number in random_number_list:
+      print(number)
+      result_number = f"{number:04}"
+      preview_image_list.append(request.host_url + os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(result_number) + '.png'))
+
     # generate a random numebr
     global random_image_number
     random_image_number = random.randint(0, 1000)
@@ -180,7 +190,8 @@ def get_info():
       'brand_name': app.config['BRAND_NAME'], 
       'edition_name': app.config['EDITION_NAME'], 
       'rarity_box': rarity,
-      'rarity_text': rarity_text
+      'rarity_text': rarity_text,
+      'preview_image_list': preview_image_list
     }
 
 
