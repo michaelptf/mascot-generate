@@ -144,12 +144,14 @@ def download_nft_framed():
 def get_info():
     # for hompage 
     preview_image_list = []
+    formated_random_number_list = []
     # generate 6 random number for display
     random_number_list = random.sample(range(1000), 6)
     # append that 6 random images path to the list
     for number in random_number_list:
       print(number)
       result_number = f"{number:04}"
+      formated_random_number_list.append(result_number)
       preview_image_list.append(request.host_url + os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(result_number) + '.png'))
 
     # generate a random numebr
@@ -192,7 +194,7 @@ def get_info():
       'rarity_box': rarity,
       'rarity_text': rarity_text,
       'preview_image_list': preview_image_list,
-      'random_number_list': random_number_list
+      'formated_random_number_list': formated_random_number_list
     }
 
 
