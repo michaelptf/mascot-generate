@@ -168,7 +168,7 @@ def get_info():
     elif(rarity_text == "SUPER RARE"):
       rarity='super-rare'
     else:
-      rarity=''
+      rarity='rare'
     
     framed_image = os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
 
