@@ -191,7 +191,8 @@ def get_info():
       'edition_name': app.config['EDITION_NAME'], 
       'rarity_box': rarity,
       'rarity_text': rarity_text,
-      'preview_image_list': preview_image_list
+      'preview_image_list': preview_image_list,
+      'random_number_list': random_number_list
     }
 
 
