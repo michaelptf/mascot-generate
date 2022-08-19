@@ -140,7 +140,7 @@ def download_nft_framed():
   img_path = os.path.join(app.config['UPLOAD_FOLDER'], 'Framed_Amuro_' + app.config['BRAND_NAME'] + '_Avatar_'+str(image_number)+'.png')
   return send_file(img_path, as_attachment=True)
 
-@app.route('/strike_api', methods=["GET"])
+@app.route('/strike_api', methods=["GET", "POST"])
 def get_info():
     # for hompage 
     preview_image_list = []
