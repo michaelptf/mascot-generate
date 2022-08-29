@@ -83,6 +83,9 @@ def paste_nft_to_frame():
   # save the image
   nft_frame_copy.save(os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png'))
 
+  return os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
+
+
 @app.route('/', methods=["POST", "GET"])
 def home():
   preview_image_list = []
@@ -117,7 +120,7 @@ def strike():
     # get the nft image path
     global result_image
     result_image = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
-    paste_nft_to_frame()
+    framed_image = paste_nft_to_frame()
     # check the rarity of the nft
     rarity_text = checkRarity(random_image_number)
     if(rarity_text == "SUPREME"):
@@ -127,7 +130,7 @@ def strike():
     else:
       rarity=''
     
-    framed_image = os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
+    # framed_image = os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
     return render_template("striked.html", framed_image=framed_image, result_image=result_image , image_number=image_number, brand_name=app.config['BRAND_NAME'], edition_name=app.config['EDITION_NAME'], rarity_box=rarity,rarity_text=rarity_text)
 
 @app.route('/download')
@@ -172,7 +175,7 @@ def get_info():
     # get the nft image path
     global result_image
     result_image = os.path.join(app.config['UPLOAD_FOLDER'], 'Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
-    paste_nft_to_frame()
+    framed_image = paste_nft_to_frame()
     # check the rarity of the nft
     rarity_text = checkRarity(random_image_number)
     if(rarity_text == "SUPREME"):
@@ -182,7 +185,7 @@ def get_info():
     else:
       rarity='rare'
     
-    framed_image = os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
+    # framed_image = os.path.join(app.config['UPLOAD_FOLDER'],  'Framed_Amuro_'+ app.config['BRAND_NAME'] +'_Avatar_' + str(image_number) + '.png')
 
     # Returning an api for showing in  reactjs
     return {
