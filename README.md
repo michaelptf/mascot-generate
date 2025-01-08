@@ -1,7 +1,7 @@
 # mascot-generate
 ref:https://medium.com/scrappy-squirrels/tutorial-create-generative-nft-art-with-rarities-8ee6ce843133
 
-running on: https://amuro-avatar-gguduudgba-df.a.run.app/
+running on: [https://amuro-avatar-gguduudgba-df.a.run.app/](https://michaelptf.pythonanywhere.com/)
 
 ## How to start
 **Clone this repository**
